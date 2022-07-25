@@ -1,0 +1,17 @@
+build-STM32F3DISC/lib/stm32lib/CMSIS/STM32F3xx/Source/Templates/system_stm32f3xx.o: \
+ ../../lib/stm32lib/CMSIS/STM32F3xx/Source/Templates/system_stm32f3xx.c \
+ ../../lib/stm32lib/CMSIS/STM32F3xx/Include/stm32f3xx.h \
+ ../../lib/stm32lib/CMSIS/STM32F3xx/Include/stm32f303xc.h \
+ ../../lib/cmsis/inc/core_cm4.h \
+ /usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h \
+ ../../lib/cmsis/inc/cmsis_version.h ../../lib/cmsis/inc/cmsis_compiler.h \
+ ../../lib/cmsis/inc/cmsis_gcc.h ../../lib/cmsis/inc/mpu_armv7.h \
+ ../../lib/stm32lib/CMSIS/STM32F3xx/Include/system_stm32f3xx.h
+ ../../lib/stm32lib/CMSIS/STM32F3xx/Source/Templates/system_stm32f3xx.c :
+ ../../lib/stm32lib/CMSIS/STM32F3xx/Include/stm32f3xx.h :
+ ../../lib/stm32lib/CMSIS/STM32F3xx/Include/stm32f303xc.h :
+ ../../lib/cmsis/inc/core_cm4.h :
+ /usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h :
+ ../../lib/cmsis/inc/cmsis_version.h ../../lib/cmsis/inc/cmsis_compiler.h :
+ ../../lib/cmsis/inc/cmsis_gcc.h ../../lib/cmsis/inc/mpu_armv7.h :
+ ../../lib/stm32lib/CMSIS/STM32F3xx/Include/system_stm32f3xx.h :

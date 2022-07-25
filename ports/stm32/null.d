@@ -1,1 +1,1 @@
-null.o: /dev/null /usr/include/stdc-predef.h
+null.o: /dev/null

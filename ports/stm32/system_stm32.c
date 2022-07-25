@@ -79,7 +79,7 @@
 #include "boardctrl.h"
 #include "powerctrl.h"
 
-#if defined(STM32F4) || defined(STM32F7) || defined(STM32G4) || defined(STM32H7) || defined(STM32L4)
+#if defined(STM32F4) || defined(STM32F7) || defined(STM32G4) || defined(STM32H7) || defined(STM32L4) || defined(STM32F3)
 
 /**
   * @brief  System Clock Configuration
@@ -167,26 +167,26 @@ MP_WEAK void SystemClock_Config(void) {
     // The DFU bootloader changes the clocksource register from its default power
     // on reset value, so we set it back here, so the clocksources are the same
     // whether we were started from DFU or from a power on reset.
-    RCC->DCKCFGR2 = 0;
+        RCC->DCKCFGR2 = 0;
     #endif
 
     RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
     RCC_OscInitTypeDef RCC_OscInitStruct = {0};
     #if defined(STM32G4) || defined(STM32H7)
-    RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
+        RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
     #endif
 
     #if defined(STM32F4) || defined(STM32F7) || defined(STM32H7)
 
     #if defined(STM32H7) && defined(SMPS)
     // H7 MCUs with SMPS must provide a power supply configuration.
-    MODIFY_REG(PWR->CR3, PWR_SUPPLY_CONFIG_MASK, MICROPY_HW_PWR_SMPS_CONFIG);
+        MODIFY_REG(PWR->CR3, PWR_SUPPLY_CONFIG_MASK, MICROPY_HW_PWR_SMPS_CONFIG);
     #elif defined(STM32H7)
     // H7 MCUs without SMPS, lock the power supply configuration update.
-    MODIFY_REG(PWR->CR3, PWR_CR3_SCUEN, 0);
+        MODIFY_REG(PWR->CR3, PWR_CR3_SCUEN, 0);
     #else
     // other MCUs, enable power control clock.
-    __PWR_CLK_ENABLE();
+        __PWR_CLK_ENABLE();
     #endif
 
     #if defined(STM32H7)
@@ -233,7 +233,7 @@ MP_WEAK void SystemClock_Config(void) {
     #endif
 
     /* Enable HSE Oscillator and activate PLL with HSE as source */
-    #if defined(STM32F4) || defined(STM32F7) || defined(STM32G4) || defined(STM32H7)
+    #if defined(STM32F4) || defined(STM32F7) || defined(STM32G4) || defined(STM32H7) || defined(STM32F3)
     RCC_OscInitStruct.OscillatorType = MICROPY_HW_RCC_OSCILLATOR_TYPE;
     RCC_OscInitStruct.HSEState = MICROPY_HW_RCC_HSE_STATE;
     RCC_OscInitStruct.HSIState = MICROPY_HW_RCC_HSI_STATE;
@@ -365,6 +365,11 @@ MP_WEAK void SystemClock_Config(void) {
     #endif
 
     #if defined(STM32F4) || defined(STM32F7)
+    RCC_ClkInitStruct.AHBCLKDivider = MICROPY_HW_CLK_AHB_DIV;
+    RCC_ClkInitStruct.APB1CLKDivider = MICROPY_HW_CLK_APB1_DIV;
+    RCC_ClkInitStruct.APB2CLKDivider = MICROPY_HW_CLK_APB2_DIV;
+    #elif defined(STM32F3)
+    RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
     RCC_ClkInitStruct.AHBCLKDivider = MICROPY_HW_CLK_AHB_DIV;
     RCC_ClkInitStruct.APB1CLKDivider = MICROPY_HW_CLK_APB1_DIV;
     RCC_ClkInitStruct.APB2CLKDivider = MICROPY_HW_CLK_APB2_DIV;

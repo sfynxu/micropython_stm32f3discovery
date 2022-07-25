@@ -7,13 +7,26 @@
 #define MICROPY_HW_ENABLE_RTC       (1)
 #define MICROPY_HW_ENABLE_DAC       (1)
 #define MICROPY_HW_ENABLE_USB       (1)
-#define MICROPY_HW_ENABLE_SERVO     (1)
+#define MICROPY_HW_ENABLE_SERVO     (0)
 
 // HSE is 8MHz
-#define MICROPY_HW_CLK_PLLM (8)
-#define MICROPY_HW_CLK_PLLN (336)
-#define MICROPY_HW_CLK_PLLP (RCC_PLLP_DIV2)
-#define MICROPY_HW_CLK_PLLQ (7)
+//#define MICROPY_HW_CLK_PLLM (8)
+//#define MICROPY_HW_CLK_PLLN (336)
+//#define MICROPY_HW_CLK_PLLP (RCC_PLLP_DIV2)
+//#define MICROPY_HW_CLK_PLLQ (7)
+
+// For system clock, enable one source:
+#define MICROPY_HW_CLK_USE_HSI      (1) // internal 8MHz -> PLL = 48MHz.
+#define MICROPY_HW_CLK_USE_HSI48    (1) // internal 48MHz.
+// #define MICROPY_HW_CLK_USE_HSE      (1) // external crystal -> PLL = 48MHz.
+// For HSE set the crystal / clock input frequency HSE_VALUE in stm32f0xx_hal_conf.h
+//#if MICROPY_HW_CLK_USE_HSE
+//#define MICROPY_HW_CLK_USE_BYPASS   (1) // HSE comes from STLINK 8MHz, not crystal.
+//#endif
+
+// The board has an external 32kHz crystal
+#define MICROPY_HW_RTC_USE_LSE      (1)
+
 
 // UART config
 #if 0
@@ -41,14 +54,16 @@
 // NOTE: PC7 is connected to MCLK on the Audio chip. This is an input signal
 //       so I think as long as you're not using the audio chip then it should
 //       be fine to use as a UART pin.
-#define MICROPY_HW_UART6_TX     (pin_C6)
-#define MICROPY_HW_UART6_RX     (pin_C7)
+//#define MICROPY_HW_UART6_TX     (pin_C6)
+//#define MICROPY_HW_UART6_RX     (pin_C7)
 
 // I2C buses
 #define MICROPY_HW_I2C1_SCL (pin_B6)
 #define MICROPY_HW_I2C1_SDA (pin_B7)
-#define MICROPY_HW_I2C2_SCL (pin_B10)
-#define MICROPY_HW_I2C2_SDA (pin_B11)
+//#define MICROPY_HW_I2C2_SCL (pin_B10)
+//#define MICROPY_HW_I2C2_SDA (pin_B11)
+#define MICROPY_HW_I2C2_SCL (pin_A9)
+#define MICROPY_HW_I2C2_SDA (pin_A10)
 
 // SPI buses
 #define MICROPY_HW_SPI1_NSS  (pin_A4)
@@ -63,8 +78,8 @@
 // CAN buses
 #define MICROPY_HW_CAN1_TX (pin_B9)
 #define MICROPY_HW_CAN1_RX (pin_B8)
-#define MICROPY_HW_CAN2_TX (pin_B13)
-#define MICROPY_HW_CAN2_RX (pin_B12)
+//#define MICROPY_HW_CAN2_TX (pin_B13)
+//#define MICROPY_HW_CAN2_RX (pin_B12)
 
 // USRSW is pulled low. Pressing the button makes the input go high.
 #define MICROPY_HW_USRSW_PIN        (pin_A0)
@@ -73,14 +88,22 @@
 #define MICROPY_HW_USRSW_PRESSED    (1)
 
 // LEDs
-#define MICROPY_HW_LED1             (pin_D14) // red
+//#define MICROPY_HW_LED1             (pin_D14) // red
 #define MICROPY_HW_LED2             (pin_D12) // green
-#define MICROPY_HW_LED3             (pin_D13) // orange
-#define MICROPY_HW_LED4             (pin_D15) // blue
+//#define MICROPY_HW_LED3             (pin_D13) // orange
+//#define MICROPY_HW_LED4             (pin_D15) // blue
+#define MICROPY_HW_LED3             (pin_E9)    // red1
+#define MICROPY_HW_LED4             (pin_E8)    // blue1
+#define MICROPY_HW_LED5             (pin_E10)   // orange1
+#define MICROPY_HW_LED6             (pin_E15)   // green1
+#define MICROPY_HW_LED7             (pin_E11)   // green2
+#define MICROPY_HW_LED8             (pin_E14)   // orange2
+#define MICROPY_HW_LED9             (pin_E12)   // blue2
+#define MICROPY_HW_LED10            (pin_E13)   // red2
 #define MICROPY_HW_LED_ON(pin)      (mp_hal_pin_high(pin))
 #define MICROPY_HW_LED_OFF(pin)     (mp_hal_pin_low(pin))
 
 // USB config
-#define MICROPY_HW_USB_FS              (1)
-#define MICROPY_HW_USB_VBUS_DETECT_PIN (pin_A9)
-#define MICROPY_HW_USB_OTG_ID_PIN      (pin_A10)
+#define MICROPY_HW_USB_FS              (0)
+//#define MICROPY_HW_USB_VBUS_DETECT_PIN (pin_A9)
+//#define MICROPY_HW_USB_OTG_ID_PIN      (pin_A10)

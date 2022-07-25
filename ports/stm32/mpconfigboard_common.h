@@ -284,6 +284,17 @@
 #define MICROPY_HW_MAX_UART (8)
 #define MICROPY_HW_MAX_LPUART (0)
 
+// Configuration for STM32F3
+#elif defined(STM32F3)
+#define MP_HAL_UNIQUE_ID_ADDRESS (0x1ffff7ac)
+#define PYB_EXTI_NUM_VECTORS (23)
+#define MICROPY_HW_MAX_I2C (2)
+#define MICROPY_HW_MAX_TIMER (18)
+#define MICROPY_HW_MAX_UART (3)
+#define MICROPY_HW_MAX_LPUART (0)
+
+
+
 // Configuration for STM32F4 series
 #elif defined(STM32F4)
 

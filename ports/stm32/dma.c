@@ -80,7 +80,7 @@ typedef union {
 struct _dma_descr_t {
     #if defined(STM32F4) || defined(STM32F7) || defined(STM32H7)
     DMA_Stream_TypeDef *instance;
-    #elif defined(STM32F0) || defined(STM32G0) || defined(STM32G4) || defined(STM32L0) || defined(STM32L4) || defined(STM32WB) || defined(STM32WL)
+    #elif defined(STM32F0) || defined(STM32F3) || defined(STM32G0) || defined(STM32G4) || defined(STM32L0) || defined(STM32L4) || defined(STM32WB) || defined(STM32WL)
     DMA_Channel_TypeDef *instance;
     #else
     #error "Unsupported Processor"

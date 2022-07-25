@@ -156,6 +156,7 @@ STATIC uint update_reset_mode(uint reset_mode) {
             }
             mp_hal_delay_ms(400);
         }
+        
         #else
         #error Need a reset mode update method
         #endif

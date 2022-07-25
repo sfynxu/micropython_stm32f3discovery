@@ -1,0 +1,2 @@
+MP_REGISTER_ROOT_POINTER(mp_obj_t pyb_hid_report_desc);
+MP_REGISTER_ROOT_POINTER(mp_obj_t pyb_usb_vcp_irq[(1)]);
